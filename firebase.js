@@ -6,7 +6,19 @@ var fan = document.getElementById('fan');
 var swinging = document.getElementById('swinging');
 var toy = document.getElementById('toy');
 
+console.log(fan.state);
 
+/*Email.send({
+    Host : "smtp.gmail.com",
+    Username : "mitalkamani500@gmail.com",
+    Password : "janetusala",
+    To : "mitalkamani500@gmail.com",
+    From : "mitalkamani500@gmail.com",
+    Subject : "Baby cradle warning",
+    Body : "your baby is crying"
+}).then(
+  message => alert(message)
+);*/
 ////      FUNCTIONS  //////////////////////////////////////////////////////////////////////////////////////
 //function to generate random numbers in a range
 function randomNumber(min, max){

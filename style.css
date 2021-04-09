@@ -15,6 +15,10 @@ body{
     margin-top: 20px;
 }
 
+#value{
+    margin-bottom:20px;
+}
+
 #tempValue{
     font-size:40px;
     font-weight:semibold;
