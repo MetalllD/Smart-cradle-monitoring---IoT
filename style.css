@@ -1,0 +1,48 @@
+body{
+    text-align: left;
+}
+
+#title{
+    margin-top:30px;
+    padding:30px;
+    background-color: rgb(29, 95, 218);
+    color:cornsilk;
+    border-radius: 20px;
+}
+
+#values{
+    padding:30px;
+    margin-top: 20px;
+}
+
+#tempValue{
+    font-size:50px;
+    font-weight:semibold;
+    color:blue;
+}
+
+#symbol{
+    color:blue;
+}
+
+#cryingState{
+    font-size:50px;
+    font-weight:semibold;
+    color:blue;
+}
+
+#humidValue{
+    font-size:50px;
+    font-weight:semibold;
+    color:blue;
+}
+
+#unit{
+    color:blue;
+}
+
+#states{
+    padding:30px;
+}
+
+
