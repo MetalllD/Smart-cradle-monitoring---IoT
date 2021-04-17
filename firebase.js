@@ -47,6 +47,20 @@ function sendData(){
     tempRandom = randomNumber(20, 35);
     humidRandom = randomNumber(65, 100);
 
+    if(tempRandom>30){
+      fanPrev=1;
+    }
+    else{
+      fanPrev=0;
+    }
+
+    if(noise>90){
+      swingPrev=1;
+    }
+    else{
+      swingPrev=0;
+    }
+
     dbsend.set({
         toy:toyPrev,
         swinging:swingPrev,
@@ -151,7 +165,7 @@ setInterval(sendData,5000);
 ////      DISPLAYING PART  //////////////////////////////////////////////////////////////////////////////////////
 //displaying temperature values to webapp
 var dbtemp = firebase.database().ref('temperature/');
-dbtemp.on('value',snap => tempValue.innerText = snap.val());
+dbtemp.on('value',snap =>  tempValue.innerText = snap.val());
 
 //displaying humidity values to webapp
 var dbhumid = firebase.database().ref('humidity/');
@@ -164,20 +178,38 @@ dbcrying.on('value',snap => cryingState.innerText = snap.val());
 var fanState = firebase.database().ref('/fan');                  
 fanState.on("value", function (snap) {
             if(snap.val()==1){
-        }
+              fan.checked=true;
+              fanPrev=1;
+            }
+            else{
+                fan.checked=false;
+                fanPrev=0;
+            }
     })
 
 var swingState = firebase.database().ref('/swinging');                  
 swingState.on("value", function (snap) {
             if(snap.val()==1){
-        }
+              swinging.checked=true;
+              swingPrev=1;
+             }
+            else{
+            swinging.checked=false;
+            swingPrev=0;
+            }
     })
 
 
 var toyState = firebase.database().ref('/toy');                  
 toyState.on("value", function (snap) {
                 if(snap.val()==1){
+                  toy.checked=true;
+                  toyPrev=1;
             }
+            else {
+              toy.checked=false;
+              toyPrev=0;
+        }
         })
     
 
