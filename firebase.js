@@ -8,18 +8,10 @@ var toy = document.getElementById('toy');
 var fanPrev = 0;
 var swingPrev = 0;
 var toyPrev = 0;
-/*Email.send({
-    Host : "smtp.gmail.com",
-    Username : "mitalkamani500@gmail.com",
-    Password : "janetusala",
-    To : "mitalkamani500@gmail.com",
-    From : "mitalkamani500@gmail.com",
-    Subject : "Baby cradle warning",
-    Body : "your baby is crying"
-}).then(
-  message => alert(message)
-);*/
+
+
 ////      FUNCTIONS  //////////////////////////////////////////////////////////////////////////////////////
+
 //function to generate random numbers in a range
 function randomNumber(min, max){
     const r = Math.random()*(max-min) + min
@@ -37,16 +29,20 @@ function detectCrying(int){
     }
 }
 ////      SENDIND PART  //////////////////////////////////////////////////////////////////////////////////////
+
 //referencing database
 dbsend = firebase.database().ref();
 dbsend.set({fan:0,swinging:0})
+
 //sending values to database
 function sendData(){
 
+//generating random values
     noise = randomNumber(60, 120); 
     tempRandom = randomNumber(20, 35);
     humidRandom = randomNumber(65, 100);
 
+//checking temperature to turn fan on
     if(tempRandom>30){
       fanPrev=1;
     }
@@ -54,6 +50,7 @@ function sendData(){
       fanPrev=0;
     }
 
+//checking crying to start swinging
     if(noise>90){
       swingPrev=1;
     }
@@ -61,6 +58,7 @@ function sendData(){
       swingPrev=0;
     }
 
+//setting values in firebase
     dbsend.set({
         toy:toyPrev,
         swinging:swingPrev,
@@ -70,6 +68,8 @@ function sendData(){
         crying:detectCrying(noise) 
     })
 
+
+//checking the state of fan toggle switch
     fan.addEventListener('change', function(event) {
         if(event.target.checked){
         console.log("Fan On");
@@ -97,6 +97,7 @@ function sendData(){
         }
       });
 
+//checking the state of swinging toggle switch
       swinging.addEventListener('change', function(event) {
         if(event.target.checked){
         console.log("Swinging On");
@@ -125,6 +126,7 @@ function sendData(){
       });
 
 
+//checking the state of toy toggle switch
       toy.addEventListener('change', function(event) {
         if(event.target.checked){
         console.log("toy On");
@@ -154,8 +156,7 @@ function sendData(){
       console.log(noise);
 }
    
-
-
+//sending data at every 5 seconds
 setInterval(sendData,5000);
 
 
@@ -163,6 +164,9 @@ setInterval(sendData,5000);
 
 
 ////      DISPLAYING PART  //////////////////////////////////////////////////////////////////////////////////////
+
+/////     DISPLAYING VALUES OF PARAMETERS    /////////////////////////////////////////////////////////////////////
+
 //displaying temperature values to webapp
 var dbtemp = firebase.database().ref('temperature/');
 dbtemp.on('value',snap =>  tempValue.innerText = snap.val());
@@ -175,6 +179,10 @@ dbhumid.on('value',snap => humidValue.innerText = snap.val());
 var dbcrying = firebase.database().ref('crying/');
 dbcrying.on('value',snap => cryingState.innerText = snap.val());
 
+
+//////     DISPLAYING VALUES OF TOGGLE SWITCHES   ////////////////////////////////////////////////////////////////
+
+//displaying the state of fan toggle switch
 var fanState = firebase.database().ref('/fan');                  
 fanState.on("value", function (snap) {
             if(snap.val()==1){
@@ -187,6 +195,7 @@ fanState.on("value", function (snap) {
             }
     })
 
+//displaying the state of swinging toggle switch
 var swingState = firebase.database().ref('/swinging');                  
 swingState.on("value", function (snap) {
             if(snap.val()==1){
@@ -199,7 +208,7 @@ swingState.on("value", function (snap) {
             }
     })
 
-
+//displaying the state of toy toggle switch
 var toyState = firebase.database().ref('/toy');                  
 toyState.on("value", function (snap) {
                 if(snap.val()==1){
@@ -213,4 +222,16 @@ toyState.on("value", function (snap) {
         })
     
 
-////// Toggles //////////////////////////////////////////////////////////////////////////////////////////////////
+////   FAILED EMAIL SENDING PART  ////////////////////////////////////////////////////////////////////////////
+/*Email.send({
+    Host : "smtp.gmail.com",
+    Username : "mitalkamani500@gmail.com",
+    Password : "janetusala",
+    To : "mitalkamani500@gmail.com",
+    From : "mitalkamani500@gmail.com",
+    Subject : "Baby cradle warning",
+    Body : "your baby is crying"
+}).then(
+  message => alert(message)
+);*/
+
