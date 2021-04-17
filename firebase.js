@@ -5,6 +5,7 @@ var humidValue = document.getElementById('humidValue');
 var fan = document.getElementById('fan');
 var swinging = document.getElementById('swinging');
 var toy = document.getElementById('toy');
+var alert_crying = document.getElementById('alert_crying')
 var fanPrev = 0;
 var swingPrev = 0;
 var toyPrev = 0;
@@ -50,12 +51,16 @@ function sendData(){
       fanPrev=0;
     }
 
-//checking crying to start swinging
+//checking crying to start swinging and show alert
     if(noise>90){
       swingPrev=1;
+      alert_crying.style.visibility= "visible";
+      alert_crying.style.height= "auto";
     }
     else{
       swingPrev=0;
+      alert_crying.style.visibility= "hidden";
+      alert_crying.style.height= "0px";
     }
 
 //setting values in firebase
