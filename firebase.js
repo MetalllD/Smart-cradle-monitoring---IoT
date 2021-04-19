@@ -239,16 +239,5 @@ toyState.on("value", function (snap) {
         })
     
 
-////   FAILED EMAIL SENDING PART  ////////////////////////////////////////////////////////////////////////////
-/*Email.send({
-    Host : "smtp.gmail.com",
-    Username : "mitalkamani500@gmail.com",
-    Password : "janetusala",
-    To : "mitalkamani500@gmail.com",
-    From : "mitalkamani500@gmail.com",
-    Subject : "Baby cradle warning",
-    Body : "your baby is crying"
-}).then(
-  message => alert(message)
-);*/
+
 
