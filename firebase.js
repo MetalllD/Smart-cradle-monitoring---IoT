@@ -41,7 +41,7 @@ function sendData(){
 //generating random values
     noise = randomNumber(60, 120); 
     tempRandom = randomNumber(20, 35);
-    humidRandom = randomNumber(65, 100);
+    humidRandom = randomNumber(60, 100);
 
 //checking temperature to turn fan on
     if(tempRandom>30){
@@ -51,11 +51,26 @@ function sendData(){
       fanPrev=0;
     }
 
+//checking humidity to turn fan on
+    if(humidRandom>70){
+      fanPrev=1;
+    }
+    else{
+      fanPrev=0;
+    }
+
+
 //checking crying to start swinging and show alert
     if(noise>90){
       swingPrev=1;
       alert_crying.style.visibility= "visible";
       alert_crying.style.height= "auto";
+      
+//Sending email if baby is crying
+      emailjs.send('iot','template_sz8rm88').then(function(res){
+        console.log("success",res.status);
+      })
+
     }
     else{
       swingPrev=0;
@@ -163,9 +178,6 @@ function sendData(){
    
 //sending data at every 5 seconds
 setInterval(sendData,5000);
-
-
-
 
 
 ////      DISPLAYING PART  //////////////////////////////////////////////////////////////////////////////////////
